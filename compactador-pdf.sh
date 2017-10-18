@@ -13,7 +13,17 @@ do
 	if [ $uncompressedFileSize -le $compressedFileSize ]; then
 		rm "$file.pdf"
 	else
-		mv "$file" "$diretory/../backup-files"
+
+    filePath=$(echo ${file%/*})
+    backupPath="$diretory/../backup-files${filePath#$diretory}"
+
+	  if [ -d "$backupPath/"]; then
+      mv "$file" "$backupPath"
+    else
+      mkdir -p "$backupPath"
+      mv "$file" "$backupPath"
+    fi
+
 		mv "$file.pdf" "$file"
 	fi
 done
