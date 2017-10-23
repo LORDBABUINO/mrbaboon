@@ -1,7 +1,7 @@
 #!/bin/bash
 
 diretory=$1
-sudo mkdir $diretory/../backup-files
+backup=$2
 
 sudo find $diretory -type f -iname "*.pdf" | while read -r file
 do
@@ -15,7 +15,7 @@ do
 	else
 
     filePath=$(echo ${file%/*})
-    backupPath="$diretory/../backup-files${filePath#$diretory}"
+    backupPath="$backup/${filePath#$diretory}"
 
 	  if [ -d "$backupPath/"]; then
       mv "$file" "$backupPath"
