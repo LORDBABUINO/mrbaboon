@@ -3,7 +3,7 @@
 diretory=$1
 backup=$2
 
-sudo find $diretory -type f -iname "*.pdf" | while read -r file
+sudo find "$diretory" -type f -iname "*.pdf" | while read -r file
 do
   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dBATCH -dQUIET -sOutputFile="$file.pdf" "$file"
 
